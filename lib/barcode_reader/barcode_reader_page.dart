@@ -77,10 +77,12 @@ class _BarcodeReaderPageState extends State<BarcodeReaderPage> {
       if (widget.successBeep) {
         FlutterBeep.beep();
       }
-      if (!_popBack) {
-        _popBack = true;
-        _popTime(data);
-      }
+      setState(() {
+        if (!_popBack) {
+          _popBack = true;
+          _popTime(data);
+        }
+      });
       // Navigator.of(context).pop(data);
     });
   }
