@@ -43,6 +43,7 @@ class _BarcodeReaderPageState extends State<BarcodeReaderPage> {
 
   bool _hasTorch = false;
   bool _isTorchOn = false;
+  bool _popBack = false;
   bool _isBorderVisible = false;
   Timer _borderFlashTimer;
 
@@ -76,12 +77,22 @@ class _BarcodeReaderPageState extends State<BarcodeReaderPage> {
       if (widget.successBeep) {
         FlutterBeep.beep();
       }
-      Navigator.of(context).pop(data);
+      if (!_popBack) {
+        _popBack = true;
+        _popTime(data);
+      }
+      // Navigator.of(context).pop(data);
     });
+  }
+
+  Future<dynamic> _popTime(data) async {
+    widget.test();
+    Navigator.of(context).pop(data);
   }
 
   @override
   void dispose() {
+    _captureController.pause();
     _borderFlashTimer.cancel();
     super.dispose();
   }
