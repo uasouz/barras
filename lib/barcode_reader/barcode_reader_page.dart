@@ -86,7 +86,6 @@ class _BarcodeReaderPageState extends State<BarcodeReaderPage> {
   }
 
   Future<dynamic> _popTime(data) async {
-    widget.test();
     Navigator.of(context).pop(data);
   }
 
